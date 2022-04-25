@@ -1,9 +1,7 @@
 import React from 'react';
 import Proptypes from 'proptypes';
 import { useSelector } from 'react-redux';
-import { List ,Colors } from 'react-native-paper';
-
-List
+import { List, Colors } from 'react-native-paper';
 
 export default function QuestionList() {
   const { questionsReponse } = useSelector((state) => ({
@@ -19,7 +17,6 @@ export default function QuestionList() {
         {correct_answer === answer ? (
           <List.Item
             title={question}
-            //description={`Correct Answer: ${correct_answer}`}
             left={() => (
               <List.Icon icon='check' color={Colors.green500} />
             )}
@@ -27,13 +24,11 @@ export default function QuestionList() {
         ) : (
           <List.Item
             title={question}
-            //description={`Correct Answer: ${correct_answer}`}
             left={() => (
               <List.Icon icon='close' color={Colors.red500} />
             )}
           />
         )}
-        {/* {question} */}
       </List.Section>
     );
   });

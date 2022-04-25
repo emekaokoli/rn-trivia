@@ -10,35 +10,24 @@ import { useSelector } from 'react-redux';
 import { LoadingScreen } from './LoadingScreen';
 
 export default function CardScreen({ handleAnswer }) {
-  
+  const {
+    questions,
+    nextQuestion,
+    currentQuestion,
+    isloading,
+    error,
+  } = useSelector((state) => ({
+    questions: state.questions,
+    nextQuestion: state.nextQuestion,
+    currentQuestion: state.currentQuestion,
+    isloading: state.isloading,
+    error: state.error,
+  }));
 
-  const { questions, nextQuestion, currentQuestion, isloading, error } =
-    useSelector((state) => ({
-      questions: state.questions,
-      nextQuestion: state.nextQuestion,
-      currentQuestion: state.currentQuestion,
-      isloading: state.isloading,
-      error: state.error,
-    }));
   const { question, category } = nextQuestion;
 
-  if (isloading) {
-    return (
-      <View>
-        <Text>
-          <LoadingScreen />
-        </Text>
-      </View>
-    );
-  };
-
-  if (error) {
-    return (
-      <View>
-        <Text>{error}</Text>
-      </View>
-    );
-  }
+  if (isloading) return <LoadingScreen />;
+  if (error) return <Text>{error}</Text>;
 
   return (
     <View style={styles.container} key={1}>
@@ -76,7 +65,7 @@ const styles = StyleSheet.create({
     height: 450,
     width: 400,
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 5,
     justifyContent: 'center',
     marginHorizontal: 5,
     shadowColor: 'rgba(0,0,0, .4)',
@@ -100,7 +89,6 @@ const styles = StyleSheet.create({
   questions: {
     flex: 3,
   },
-  // fontWeight: 'bold',
   questionsText: {
     fontSize: 20,
     margin: 25,
@@ -110,7 +98,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   buttonContainer: {
-    //flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -126,8 +113,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   questionsGroup: {
-    // maxWidth: '100%',
-    // justifyContent: 'center',
     alignItems: 'center',
   },
 });
